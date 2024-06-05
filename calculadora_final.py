@@ -29,6 +29,7 @@ def conjuntos():
         conjuntoB.append(int(valor))
     print (f"O conjunto B é: {conjuntoB}")
     return conjuntoA, conjuntoB
+
 def menuConjuntos():
     while True:
         print("--" * 25)
@@ -58,6 +59,7 @@ def menuConjuntos():
             break
         else:
             break
+
 def menu_funcao():
     while True:
         print("--" * 25)
@@ -98,6 +100,7 @@ def menu_funcao():
             break
         else:
             break
+
 def menu_exponencial():
     while True:
         print("--" * 25)
@@ -146,7 +149,7 @@ def menu_matrizes():
                 matriz.append(linhas)
             if opcaoConjunto == 1:
                 print("Verificar se a matriz é quadrada")
-                verificar_quadrada(numero_linhas_m1, numero_colunas_m1)
+                verificar_quadrada(numero_linhas_m1, numero_colunas_m1, matriz)
             elif opcaoConjunto == 2:
                 print("Informações da matriz 2")
                 matriz2 = []
@@ -169,11 +172,41 @@ def menu_matrizes():
         else:
             break
 
-def verificar_quadrada(linhas, colunas): 
+def verificar_quadrada(linhas, colunas, matriz): 
     if linhas == colunas:
         print("A matriz é quadrada")
+        #cálculo do determinante
+        if linhas == 2 and colunas == 2:
+            #diagonal direita
+            mult_principal = matriz[0][0] * matriz[1][1]
+            #diagonal esquerda
+            mult_secundaria = matriz[0][1] * matriz [1][0]
+            soma = mult_principal-mult_secundaria
+            print(f"O determinante é: {soma}")
+
+        elif linhas == 3 and colunas == 3:
+            mult_principal1 = matriz[0][0] * matriz [1][1] * matriz[2][2]
+            mult_principal2 = matriz[0][1] * matriz [1][2] * matriz[2][0]
+            mult_principal3 = matriz[0][2] * matriz [1][0] * matriz[2][1]
+
+            soma_principal = mult_principal1 + mult_principal2 + mult_principal3
+
+            mult_secundaria1 = matriz[0][1] * matriz [1][0] * matriz[2][2]
+            mult_secundaria2 = matriz[0][0] * matriz [1][2] * matriz[2][1]
+            mult_secundaria3 = matriz[0][2] * matriz [1][1] * matriz[2][0]
+
+            soma_secundaria = mult_secundaria1 + mult_secundaria2 + mult_secundaria3
+
+            resultado = soma_principal - soma_secundaria
+            print(f"O determinante é: {resultado}")
+
+        else:
+            print("Matriz diferente de 2x2 ou 3x3")
+
+
+
     else:
-        print("A matriz não é quadrada")
+        print("Não é possível calcular o determinante")
 
 def multiplicacao_matriz(matriz1, linhasm1, colunasm1, matriz2, linhasm2, colunasm2):
     resultado = []
@@ -186,8 +219,9 @@ def multiplicacao_matriz(matriz1, linhasm1, colunasm1, matriz2, linhasm2, coluna
                 soma += matriz1[i][k] * matriz2[k][j]
             linha_resultante.append(soma)
         resultado.append(linha_resultante)
-    print(resultado)
-
+    #print(resultado)
+    for linha in resultado:
+        print(linha)
         
 def matriz_transposta(matriz, numero_linhas, numero_colunas):
     matriz_t = []
@@ -200,7 +234,6 @@ def matriz_transposta(matriz, numero_linhas, numero_colunas):
     for linha in matriz_t:
         print(linha)
     
-
 def verificar_exponencial():
     a = int(input("Digite o 'a' da função: "))
     b = int(input("Digite o 'b' da função: "))
@@ -210,6 +243,7 @@ def verificar_exponencial():
         print(f"A função 'y = {a} x {b}²' é  decrescente")
     else:
         print(f"A função 'y = {a} x {b}²' é  neutra")
+
 def calcular_exponencial():
     a = int(input("Digite o 'a' da função: "))
     b = int(input("Digite o 'b' da função: "))
@@ -231,8 +265,6 @@ def grafico_exponencial():
     plt.axvline(0, color='black',linewidth=0.5)
     plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
     plt.show()
-    
-    
     
 def raizes_funcao(a,b,c):
     delta = b**2 -4 * a * c
@@ -275,18 +307,23 @@ def verificar_conjuntos():
         print("Conjunto A é conjunto Próprio de B" )
     else:
         print("Conjunto A não é próprio de B")
+
 def uniao_conjuntos():
     conjuntoA, conjuntoB = conjuntos()
     a = conjuntoA + conjuntoB
     print(f"A união do conjunto A com o conjuto B é: {a}")
+
 def intesecao_conjuntos():
     conjuntoA, conjuntoB = conjuntos()
     interseccao = set(conjuntoA) & set(conjuntoB)
     print(f"A intrsecção de A com B é: {interseccao}")
+
 def diferença_conjuntos():
     conjuntoA, conjuntoB = conjuntos()
     conjunto = set(conjuntoA) - set(conjuntoB)
     print(f"A difereça de A e B é: {conjunto}")
+
+
 #Código prinpal!!!
 while True:
     while True:
